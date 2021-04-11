@@ -14,10 +14,12 @@ binary:
 	mkdir -p debian/lockbook-desktop/usr/share/applications
 	mkdir -p debian/lockbook-desktop/usr/share/pixmaps
 
-	cp lockbook/clients/linux/target/release/lockbook debian/lockbook-desktop/usr/bin/lockbook-desktop
-	cp lockbook-desktop.desktop debian/lockbook-desktop/usr/share/applications
-	cp lockbook/graphics/SVGs/dark-1.svg debian/lockbook-desktop/usr/share/pixmaps
-
+	mv lockbook/clients/linux/target/release/lockbook lockbook/clients/linux/target/release/lockbook-desktop
 	strip --strip-all debian/lockbook-desktop/usr/bin/lockbook-desktop
+
+	install -D -m755 "lockbook/clients/linux/target/release/lockbook-desktop" "debian/lockbook-desktop/usr/bin/lockbook-desktop"
+	install -D -m644 "lockbook/graphics/SVGs/dark-1.svg" "debian/lockbook-desktop/usr/share/pixmaps"
+	install -D -m644 "lockbook-desktop.desktop" "debian/lockbook-desktop/usr/share/pixmaps"
+
 	dh_gencontrol
 	dh_builddeb
