@@ -27,6 +27,7 @@ fn main() {
         object: hash,
         type_tagged: "commit".to_string()
     };
+    // cookies
 
     auth_user.create_a_tag(&repo_info, &tag_info).unwrap();
     
