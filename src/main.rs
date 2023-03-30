@@ -5,7 +5,7 @@ use gh_release::{ReleaseClient, RepoInfo};
 use gh_release::release::{CreateReleaseInfo, ReleaseInfo, TagInfo};
 
 fn main() {
-    let auth_user = ReleaseClient::new("b4f3729ff174de5f2057052f8e8ad53a9575de4c".to_string()).unwrap();
+    let auth_user = ReleaseClient::new("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".to_string()).unwrap();
     let repo_info = RepoInfo {
         owner: "smailbarkouch",
         repo_name: "test-debian-stuff"
@@ -22,8 +22,8 @@ fn main() {
         .to_string();
 
     let tag_info = TagInfo {
-        tag: "0.0.7".to_string(),
-        message: "The first release ever.".to_string(),
+        tag: "0.1.3".to_string(),
+        message: "".to_string(),
         object: hash,
         type_tagged: "commit".to_string()
     };
@@ -31,18 +31,16 @@ fn main() {
     auth_user.create_a_tag(&repo_info, &tag_info).unwrap();
     
     let release_info = CreateReleaseInfo {
-        tag_name: "0.0.7".to_string(),
+        tag_name: "0.1.3".to_string(),
         target_commitish: None,
-        name: Some("This is the new version".to_string()),
+        name: Some("0.1.3".to_string()),
         body: None,
         draft: None,
         prerelease: None,
         discussion_category_name: None,
         generate_release_notes: Some(true),
-        make_latest: None
+        make_latest: Some("true".to_string())
     };
-
-
 
     auth_user.create_a_release(&repo_info, &release_info).unwrap();
 }
