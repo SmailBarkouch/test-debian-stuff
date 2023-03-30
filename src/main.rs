@@ -42,5 +42,7 @@ fn main() {
         make_latest: None
     };
 
+
+
     auth_user.create_a_release(&repo_info, &release_info).unwrap();
 }
