@@ -5,7 +5,7 @@ use gh_release::{ReleaseClient, RepoInfo};
 use gh_release::release::{CreateReleaseInfo, ReleaseInfo, TagInfo};
 
 fn main() {
-    let auth_user = ReleaseClient::new("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".to_string()).unwrap();
+    let auth_user = ReleaseClient::new(env::var("GITHUB_TOKEN").unwrap()).unwrap();
     let repo_info = RepoInfo {
         owner: "smailbarkouch",
         repo_name: "test-debian-stuff"
@@ -21,8 +21,10 @@ fn main() {
         .trim()
         .to_string();
 
+
+    // added comment
     let tag_info = TagInfo {
-        tag: "0.1.3".to_string(),
+        tag: "0.1.4".to_string(),
         message: "".to_string(),
         object: hash,
         type_tagged: "commit".to_string()
@@ -32,9 +34,9 @@ fn main() {
     auth_user.create_a_tag(&repo_info, &tag_info).unwrap();
     
     let release_info = CreateReleaseInfo {
-        tag_name: "0.1.3".to_string(),
+        tag_name: "0.1.4".to_string(),
         target_commitish: None,
-        name: Some("0.1.3".to_string()),
+        name: Some("0.1.4".to_string()),
         body: None,
         draft: None,
         prerelease: None,
